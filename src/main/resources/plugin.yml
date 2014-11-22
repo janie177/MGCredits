@@ -1,0 +1,30 @@
+main: com.minegusta.mgcredits.Main
+name: MGCredits
+version: ${project.version}
+author: janie177
+commands:
+   addcredits:
+      description: Add credits to a player.
+      usage: /addcredits player amount
+      permission: minegusta.addcredits
+   credits:
+      description: View your own credits.
+      usage: /credits
+      permission: minegusta.credits
+   removecredits:
+      description: Remove an amount of credits from a player.
+      permission: minegusta.removecredits
+      usage: /removecredits player amount
+
+permissions:
+   minegusta.addcredits:
+     description: manage credits
+     default: true
+permissions:
+   minegusta.credits:
+     description: view your credits
+     default: op
+permissions:
+   minegusta.removecredits:
+     description: manage credits
+     default: op
