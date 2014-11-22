@@ -20,11 +20,9 @@ permissions:
    minegusta.addcredits:
      description: manage credits
      default: true
-permissions:
    minegusta.credits:
      description: view your credits
      default: op
-permissions:
    minegusta.removecredits:
      description: manage credits
      default: op
