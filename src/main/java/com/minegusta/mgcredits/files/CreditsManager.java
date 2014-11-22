@@ -21,9 +21,9 @@ public class CreditsManager
      * @param p The player to remove it from.
      * @param a The amount to remove.
      */
-    public static void removeCredits(Player p, int a)
+    public static boolean removeCredits(Player p, int a)
     {
-        conf.removeCredits(p.getUniqueId(), a);
+        return conf.removeCredits(p.getUniqueId(), a);
     }
 
     /**
