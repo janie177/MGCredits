@@ -19,6 +19,7 @@ public class CreditModel {
 
         CreditModel creditModel = new CreditModel();
         creditModel.credits = 0;
+        creditModel.minecraftID = uuid.toString();
 
         creditModel.insert();
 
