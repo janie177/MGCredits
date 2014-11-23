@@ -15,7 +15,7 @@ public class Main extends JavaPlugin{
 
         //Files
         getConfig().options().copyDefaults(true);
-        PLUGIN.saveDefaultConfig();
+        saveDefaultConfig();
 
 
         //Commands

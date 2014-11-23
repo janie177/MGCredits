@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 
 public class CreditCommand implements CommandExecutor{
 
-    private static Config config = new Config();
     @Override
     public boolean onCommand(CommandSender s, Command cmd, String label, String[] args)
     {
@@ -19,7 +18,7 @@ public class CreditCommand implements CommandExecutor{
         if(cmd.getName().equalsIgnoreCase("credits") && s instanceof Player)
         {
             Player p = (Player) s;
-            p.sendMessage(ChatColor.GOLD + "[MG] " + ChatColor.YELLOW + "You have " + ChatColor.LIGHT_PURPLE + config.getCredits(p.getUniqueId()) + ChatColor.YELLOW + " credits.");
+            p.sendMessage(ChatColor.GOLD + "[MG] " + ChatColor.YELLOW + "You have " + ChatColor.LIGHT_PURPLE + Config.getCredits(p.getUniqueId()) + ChatColor.YELLOW + " credits.");
             return true;
         }
 
@@ -30,7 +29,7 @@ public class CreditCommand implements CommandExecutor{
             {
                 Player p = Bukkit.getOfflinePlayer(args[0]).getPlayer();
                 int amount = Integer.parseInt(args[1]);
-                config.addCredits(p.getUniqueId(), amount);
+                Config.addCredits(p.getUniqueId(), amount);
 
             } catch (Exception ignored)
             {
@@ -44,7 +43,7 @@ public class CreditCommand implements CommandExecutor{
             {
                 Player p = Bukkit.getOfflinePlayer(args[0]).getPlayer();
                 int amount = Integer.parseInt(args[1]);
-                config.removeCredits(p.getUniqueId(), amount);
+                Config.removeCredits(p.getUniqueId(), amount);
 
             } catch (Exception ignored)
             {

@@ -33,7 +33,7 @@ public class CreditModel {
 
     public static CreditModel getFor(UUID playerId) {
         CreditModel alias = new CreditModel();
-        Db db = Db.open(Main.PLUGIN.getConfig().getString("database-url"));
+        Db db = Db.open("jdbc:" + Main.PLUGIN.getConfig().getString("database-url"));
         try {
             return db.from(alias).where(alias.minecraftID).is(playerId.toString()).selectFirst();
         } finally {
@@ -59,19 +59,19 @@ public class CreditModel {
     }
 
     public void insert() {
-        Db db = Db.open(Main.PLUGIN.getConfig().getString("database-url"));
+        Db db = Db.open("jdbc:" + Main.PLUGIN.getConfig().getString("database-url"));
         db.insert(this);
         db.close();
     }
 
     public void update() {
-        Db db = Db.open(Main.PLUGIN.getConfig().getString("database-url"));
+        Db db = Db.open("jdbc:" + Main.PLUGIN.getConfig().getString("database-url"));
         db.update(this);
         db.close();
     }
 
     public void delete() {
-        Db db = Db.open(Main.PLUGIN.getConfig().getString("database-url"));
+        Db db = Db.open("jdbc:" + Main.PLUGIN.getConfig().getString("database-url"));
         db.delete(this);
         db.close();
     }

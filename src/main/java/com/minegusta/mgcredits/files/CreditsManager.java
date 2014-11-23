@@ -13,7 +13,7 @@ public class CreditsManager
      */
     public static int getCredits(Player p)
     {
-        return conf.getCredits(p.getUniqueId());
+        return Config.getCredits(p.getUniqueId());
     }
 
     /**
@@ -23,7 +23,7 @@ public class CreditsManager
      */
     public static boolean removeCredits(Player p, int a)
     {
-        return conf.removeCredits(p.getUniqueId(), a);
+        return Config.removeCredits(p.getUniqueId(), a);
     }
 
     /**
@@ -33,6 +33,6 @@ public class CreditsManager
      */
     public static void addCredits(Player p, int a)
     {
-        conf.addCredits(p.getUniqueId(), a);
+        Config.addCredits(p.getUniqueId(), a);
     }
 }
