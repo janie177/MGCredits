@@ -1,1 +1,1 @@
-##UUID - Credits
+database-url: 'postgresql://localhost/minecraft?user=minegusta&password=lelele'

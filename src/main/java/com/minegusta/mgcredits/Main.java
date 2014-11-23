@@ -1,7 +1,6 @@
 package com.minegusta.mgcredits;
 
 import com.minegusta.mgcredits.commands.CreditCommand;
-import com.minegusta.mgcredits.files.FileManager;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -15,17 +14,13 @@ public class Main extends JavaPlugin{
         PLUGIN = this;
 
         //Files
-        FileManager.loadConfig();
+        getConfig().options().copyDefaults(true);
+        PLUGIN.saveDefaultConfig();
+
 
         //Commands
         getCommand("addcredits").setExecutor(new CreditCommand());
         getCommand("credits").setExecutor(new CreditCommand());
         getCommand("removecredits").setExecutor(new CreditCommand());
-    }
-
-    @Override
-    public void onDisable()
-    {
-
     }
 }
