@@ -29,6 +29,8 @@ public class SQLUtil {
 			conn.close();
 
 			conn = DriverManager.getConnection(url+database,user,pass);
+			stmt = conn.createStatement();
+
 			stmt.execute(sqlCreate);
 
 			conn.close();
