@@ -9,12 +9,12 @@ public class CreditsUtil {
 	private static final String user = Main.PLUGIN.getConfig().getString("user", "root");
 	private static final String pass = Main.PLUGIN.getConfig().getString("password", "");
 	private static final String url = Main.PLUGIN.getConfig().getString("database-url", "jdbc:mysql://localhost:3306/");
-	private static final String table = "credits";
+	private static final String table = "mgcredits";
 
 	public static void init()
 	{
 		SQLUtil.createDB(user, pass, url, database);
-		String tableColumns = "  (uuid           VARCHAR(40), credits           INTEGER)";
+		String tableColumns = "(uuid VARCHAR(40),credits INTEGER, PRIMARY KEY(uuid))";
 		SQLUtil.createTable(user, pass, url, database, table, tableColumns);
 	}
 
@@ -41,18 +41,14 @@ public class CreditsUtil {
 		if(conn != null)
 		{
 			try {
-				String sqlGetCredits = "SELECT * FROM " + table;
+				String sqlGetCredits = "SELECT * FROM " + table + " WHERE uuid='" + uuid + "'";
 				Statement statement = conn.createStatement();
 				ResultSet set = statement.executeQuery(sqlGetCredits);
-
 				while(set.next())
 				{
-					String name = set.getString("uuid");
-					if(name.equalsIgnoreCase(uuid)){
-						credits = set.getInt("credits");
-						break;
-					}
+					credits = set.getByte("credits");
 				}
+
 				conn.close();
 			} catch (SQLException e)
 			{
@@ -68,7 +64,8 @@ public class CreditsUtil {
 		if(conn != null)
 		{
 			try {
-				String sqlSetCredits = "INSERT INTO " + table + " (" + uuid  + ", " + amount + ")";
+				String sqlSetCredits = "REPLACE INTO " + table + " (uuid, credits)" +
+						"VALUES ('" + uuid + "', '" + amount + "')";
 
 				Statement statement = conn.createStatement();
 				statement.execute(sqlSetCredits);

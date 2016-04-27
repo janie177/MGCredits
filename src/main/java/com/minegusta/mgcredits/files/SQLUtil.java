@@ -38,10 +38,10 @@ public class SQLUtil {
 	 * Create a table in a database if it does not exist already
 	 * @param user The username to connect with.
 	 * @param pass The password to connect with.
-	 * @param url The url to connect to.
+	 * @param url The url to connect to. Example: "database-url", "jdbc:mysql://localhost:3306/"
 	 * @param database The database name.
 	 * @param table The table name to create.
-	 * @param columns The columns to include in the created table.
+	 * @param columns The columns to include in the created table. Example: (uuid VARCHAR(40),credits INTEGER, PRIMARY KEY(uuid))
 	 * @return true if the table was created.
 	 */
 	public static boolean createTable(String user, String pass, String url, String database, String table, String columns)
