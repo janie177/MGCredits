@@ -1,5 +1,6 @@
 package com.minegusta.mgcredits.commands;
 
+import com.minegusta.mgcredits.files.CreditsManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -17,7 +18,7 @@ public class CreditCommand implements CommandExecutor{
         if(cmd.getName().equalsIgnoreCase("credits") && s instanceof Player)
         {
             Player p = (Player) s;
-            p.sendMessage(ChatColor.GOLD + "[MG] " + ChatColor.YELLOW + "You have " + ChatColor.LIGHT_PURPLE + Config.getCredits(p.getUniqueId()) + ChatColor.YELLOW + " credits.");
+            p.sendMessage(ChatColor.GOLD + "[MG] " + ChatColor.YELLOW + "You have " + ChatColor.LIGHT_PURPLE + CreditsManager.getCredits(p) + ChatColor.YELLOW + " credits.");
             return true;
         }
 
@@ -28,7 +29,7 @@ public class CreditCommand implements CommandExecutor{
             {
                 Player p = Bukkit.getOfflinePlayer(args[0]).getPlayer();
                 int amount = Integer.parseInt(args[1]);
-                Config.addCredits(p.getUniqueId(), amount);
+                CreditsManager.addCredits(p, amount);
 
             } catch (Exception ignored)
             {
@@ -42,7 +43,7 @@ public class CreditCommand implements CommandExecutor{
             {
                 Player p = Bukkit.getOfflinePlayer(args[0]).getPlayer();
                 int amount = Integer.parseInt(args[1]);
-                Config.removeCredits(p.getUniqueId(), amount);
+                CreditsManager.removeCredits(p, amount);
 
             } catch (Exception ignored)
             {
