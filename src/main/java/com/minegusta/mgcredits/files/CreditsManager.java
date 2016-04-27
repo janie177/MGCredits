@@ -4,8 +4,6 @@ import org.bukkit.entity.Player;
 
 public class CreditsManager
 {
-
-    private static Config conf = new Config();
     /**
      * Get the credits for the given player.
      * @param p The player.
@@ -13,7 +11,7 @@ public class CreditsManager
      */
     public static int getCredits(Player p)
     {
-        return Config.getCredits(p.getUniqueId());
+        return SQLUtil.getCredits(p.getUniqueId().toString());
     }
 
     /**
@@ -23,7 +21,7 @@ public class CreditsManager
      */
     public static boolean removeCredits(Player p, int a)
     {
-        return Config.removeCredits(p.getUniqueId(), a);
+        return SQLUtil.removeCredits(p.getUniqueId().toString(), a);
     }
 
     /**
@@ -33,6 +31,6 @@ public class CreditsManager
      */
     public static void addCredits(Player p, int a)
     {
-        Config.addCredits(p.getUniqueId(), a);
+        SQLUtil.addCredits(p.getUniqueId().toString(), a);
     }
 }

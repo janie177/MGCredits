@@ -1,6 +1,5 @@
 package com.minegusta.mgcredits.commands;
 
-import com.minegusta.mgcredits.files.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

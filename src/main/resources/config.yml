@@ -1,1 +1,4 @@
-database-url: 'postgresql://localhost/minecraft?user=minegusta&password=lelele'
+database-url: 'jdbc:mysql://localhost:3306/'
+password: 'lelele'
+user: 'root'
+database-name: 'minegusta'
