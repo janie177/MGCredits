@@ -2,7 +2,6 @@ package com.minegusta.mgcredits.files;
 
 import java.sql.*;
 
-import com.google.common.collect.Iterables;
 import com.minegusta.mgcredits.Main;
 
 public class SQLUtil {
@@ -15,10 +14,11 @@ public class SQLUtil {
 
 	public static void init()
 	{
-
-		Connection conn = openDB();
-		if(conn == null) return;
 		try {
+			Class.forName(driver).newInstance();
+
+			Connection conn = DriverManager.getConnection(url,user,pass);
+
 			String sqlCreateDB = "CREATE DATABASE IF NOT EXISTS " + database;
 			String sqlCreate = "CREATE TABLE IF NOT EXISTS " + table
 					+ "  (uuid           VARCHAR(40),"
@@ -29,11 +29,10 @@ public class SQLUtil {
 			stmt.execute(sqlCreate);
 
 			conn.close();
-		} catch (Exception e)
-		{
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	private static Connection openDB()
