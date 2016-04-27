@@ -6,8 +6,8 @@ import com.minegusta.mgcredits.Main;
 
 public class SQLUtil {
 	private static final String database = Main.PLUGIN.getConfig().getString("database-name", "minegusta");
-	private static final String user = Main.PLUGIN.getConfig().getString("user", "minegusta");
-	private static final String pass = Main.PLUGIN.getConfig().getString("password", "lelele");
+	private static final String user = Main.PLUGIN.getConfig().getString("user", "root");
+	private static final String pass = Main.PLUGIN.getConfig().getString("password", "");
 	private static final String url = Main.PLUGIN.getConfig().getString("database-url", "jdbc:mysql://localhost:3306/");
 	private static final String driver = "com.mysql.jdbc.Driver";
 	private static final String table = "credits";
@@ -26,6 +26,9 @@ public class SQLUtil {
 
 			Statement stmt = conn.createStatement();
 			stmt.execute(sqlCreateDB);
+			conn.close();
+
+			conn = DriverManager.getConnection(url+database,user,pass);
 			stmt.execute(sqlCreate);
 
 			conn.close();
