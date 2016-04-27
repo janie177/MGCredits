@@ -22,7 +22,12 @@ public class CreditsUtil {
 
 	public static boolean addCredits(String uuid, int amount)
 	{
-		int credits = getCredits(uuid) + amount;
+		int credits;
+		try {
+			credits = getCredits(uuid) + amount;
+		} catch (Exception ignored) {
+			return false;
+		}
 		return setCredits(uuid, credits);
 	}
 
@@ -46,7 +51,7 @@ public class CreditsUtil {
 				ResultSet set = statement.executeQuery(sqlGetCredits);
 				while(set.next())
 				{
-					credits = set.getByte("credits");
+					credits = set.getInt("credits");
 				}
 
 				conn.close();
