@@ -1,7 +1,7 @@
 package com.minegusta.mgcredits;
 
 import com.minegusta.mgcredits.commands.CreditCommand;
-import com.minegusta.mgcredits.files.SQLUtil;
+import com.minegusta.mgcredits.files.CreditsUtil;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,7 +18,7 @@ public class Main extends JavaPlugin{
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
 
-        SQLUtil.init();
+        CreditsUtil.init();
 
         //Commands
         getCommand("addcredits").setExecutor(new CreditCommand());

@@ -11,7 +11,7 @@ public class CreditsManager
      */
     public static int getCredits(Player p)
     {
-        return SQLUtil.getCredits(p.getUniqueId().toString());
+        return CreditsUtil.getCredits(p.getUniqueId().toString());
     }
 
     /**
@@ -21,7 +21,7 @@ public class CreditsManager
      */
     public static boolean removeCredits(Player p, int a)
     {
-        return SQLUtil.removeCredits(p.getUniqueId().toString(), a);
+        return CreditsUtil.removeCredits(p.getUniqueId().toString(), a);
     }
 
     /**
@@ -31,6 +31,6 @@ public class CreditsManager
      */
     public static void addCredits(Player p, int a)
     {
-        SQLUtil.addCredits(p.getUniqueId().toString(), a);
+        CreditsUtil.addCredits(p.getUniqueId().toString(), a);
     }
 }
