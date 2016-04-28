@@ -28,6 +28,9 @@ public class Main extends JavaPlugin{
 
         if(!CreditsUtil.init())
         {
+            System.out.println(ChatColor. RED + " - - - - - - - - - - - - ");
+            System.out.println("[MGCredits] Disabling because no database connection could be made.");
+            System.out.println(ChatColor. RED + " - - - - - - - - - - - - ");
             Bukkit.getPluginManager().disablePlugin(this);
         }
     }
