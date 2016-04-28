@@ -7,6 +7,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Main extends JavaPlugin{
 
     public static Plugin PLUGIN;
@@ -26,11 +29,13 @@ public class Main extends JavaPlugin{
         getCommand("credits").setExecutor(new CreditCommand());
         getCommand("removecredits").setExecutor(new CreditCommand());
 
+
+        Logger logger = Bukkit.getLogger();
         if(!CreditsUtil.init())
         {
-            System.out.println(ChatColor. RED + " - - - - - - - - - - - - ");
-            System.out.println("[MGCredits] Disabling because no database connection could be made.");
-            System.out.println(ChatColor. RED + " - - - - - - - - - - - - ");
+            logger.log(Level.INFO, ChatColor. RED + " - - - - - - - - - - - - ");
+            logger.log(Level.INFO, "[MGCredits] Disabling because no database connection could be made.");
+            logger.log(Level.INFO, ChatColor. RED + " - - - - - - - - - - - - ");
             Bukkit.getPluginManager().disablePlugin(this);
         }
     }
