@@ -33,9 +33,9 @@ public class Main extends JavaPlugin{
         Logger logger = Bukkit.getLogger();
         if(!CreditsUtil.init())
         {
-            logger.log(Level.INFO, ChatColor. RED + " - - - - - - - - - - - - ");
-            logger.log(Level.INFO, "[MGCredits] Disabling because no database connection could be made.");
-            logger.log(Level.INFO, ChatColor. RED + " - - - - - - - - - - - - ");
+            logger.info(ChatColor. RED + " - - - - - - - - - - - - ");
+            logger.info("[MGCredits] Disabling because no database connection could be made.");
+            logger.info(ChatColor. RED + " - - - - - - - - - - - - ");
             Bukkit.getPluginManager().disablePlugin(this);
         }
     }
