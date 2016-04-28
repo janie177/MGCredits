@@ -21,11 +21,14 @@ public class Main extends JavaPlugin{
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
 
-        CreditsUtil.init();
-
         //Commands
         getCommand("addcredits").setExecutor(new CreditCommand());
         getCommand("credits").setExecutor(new CreditCommand());
         getCommand("removecredits").setExecutor(new CreditCommand());
+
+        if(!CreditsUtil.init())
+        {
+            Bukkit.getPluginManager().disablePlugin(this);
+        }
     }
 }

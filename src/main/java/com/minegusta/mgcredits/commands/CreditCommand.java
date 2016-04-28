@@ -13,7 +13,6 @@ public class CreditCommand implements CommandExecutor{
     @Override
     public boolean onCommand(CommandSender s, Command cmd, String label, String[] args)
     {
-
         //Check how many credits you have.
         if(cmd.getName().equalsIgnoreCase("credits") && s instanceof Player)
         {

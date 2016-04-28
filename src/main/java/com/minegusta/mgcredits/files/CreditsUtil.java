@@ -11,11 +11,9 @@ public class CreditsUtil {
 	private static final String url = Main.PLUGIN.getConfig().getString("database-url", "jdbc:mysql://localhost:3306/");
 	private static final String table = "mgcredits";
 
-	public static void init()
-	{
-		SQLUtil.createDB(user, pass, url, database);
+	public static boolean init() {
 		String tableColumns = "(uuid VARCHAR(40),credits INTEGER, PRIMARY KEY(uuid))";
-		SQLUtil.createTable(user, pass, url, database, table, tableColumns);
+		return SQLUtil.createDB(user, pass, url, database) && SQLUtil.createTable(user, pass, url, database, table, tableColumns);
 	}
 
 	//----------------------------------------------------------------------------------//
