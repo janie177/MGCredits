@@ -3,6 +3,8 @@ package com.minegusta.mgcredits.files;
 import java.sql.*;
 
 import com.minegusta.mgcredits.Main;
+import net.minegusta.mglib.sql.SQLManager;
+import net.minegusta.mglib.sql.SQLUtil;
 
 public class CreditsUtil {
 	private static final String database = Main.PLUGIN.getConfig().getString("database-name", "minegusta");
@@ -11,9 +13,14 @@ public class CreditsUtil {
 	private static final String url = Main.PLUGIN.getConfig().getString("database-url", "jdbc:mysql://localhost:3306/");
 	private static final String table = "mgcredits";
 
+	private static SQLManager sqlManager;
+
 	public static boolean init() {
 		String tableColumns = "(uuid VARCHAR(40),credits INTEGER, PRIMARY KEY(uuid))";
-		return SQLUtil.createDB(user, pass, url, database) && SQLUtil.createTable(user, pass, url, database, table, tableColumns);
+		boolean returned = SQLUtil.createDB(user, pass, url, database) && SQLUtil.createTable(user, pass, url, database, table, tableColumns);
+
+		sqlManager = SQLManager.create(database, user, pass, url);
+		return returned;
 	}
 
 	//----------------------------------------------------------------------------------//
@@ -40,46 +47,42 @@ public class CreditsUtil {
 	public static int getCredits(String uuid)
 	{
 		int credits = 0;
-		Connection conn = SQLUtil.openDB(url, database, user, pass);
-		if(conn != null)
-		{
-			try {
-				String sqlGetCredits = "SELECT * FROM " + table + " WHERE uuid='" + uuid + "'";
-				Statement statement = conn.createStatement();
-				ResultSet set = statement.executeQuery(sqlGetCredits);
-				while(set.next())
-				{
-					credits = set.getInt("credits");
-				}
-
-				conn.close();
-			} catch (SQLException e)
+		try (Connection conn = sqlManager.getConnection()) {
+			String sqlGetCredits = "SELECT * FROM " + table + " WHERE uuid='" + uuid + "'";
+			Statement statement = conn.createStatement();
+			ResultSet set = statement.executeQuery(sqlGetCredits);
+			while(set.next())
 			{
-				e.printStackTrace();
+				credits = set.getInt("credits");
 			}
+
+			set.close();
+			conn.close();
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
 		}
 		return credits;
 	}
 
 	public static boolean setCredits(String uuid, int amount)
 	{
-		Connection conn = SQLUtil.openDB(url, database, user, pass);
-		if(conn != null)
+		try (Connection conn = sqlManager.getConnection())
 		{
-			try {
-				String sqlSetCredits = "REPLACE INTO " + table + " (uuid, credits)" +
-						"VALUES ('" + uuid + "', '" + amount + "')";
+			String sqlSetCredits = "REPLACE INTO " + table + " (uuid, credits)" +
+					"VALUES ('" + uuid + "', '" + amount + "')";
 
-				Statement statement = conn.createStatement();
-				statement.execute(sqlSetCredits);
+			Statement statement = conn.createStatement();
+			statement.execute(sqlSetCredits);
+			statement.close();
 
-				conn.close();
-			} catch (SQLException e)
-			{
-				e.printStackTrace();
-				return false;
-			}
+			conn.close();
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+			return false;
 		}
+
 		return true;
 	}
 
